@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace RepoManager
 {
-  enum Types
-  {
-    JSON = 0,
-    XML = 1
-  }
-  class Manager
+  
+  class Manager : IManager
   {
     List<Repo> LRepo = new List<Repo>();
 
@@ -53,7 +49,7 @@ namespace RepoManager
       return "Not Found";
     }
 
-    public int GetTypes( string itemName )
+    public int GetType( string itemName )
     {
       foreach( Repo r in LRepo )
       {

@@ -8,6 +8,7 @@ namespace RepoManager
 {
   struct Repo
   {
+    public string name;
     public string content;
     public int type;
   }

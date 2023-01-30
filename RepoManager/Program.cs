@@ -18,12 +18,12 @@ namespace RepoManager
       Repository.Register( "NameC", "Content C", Types.XML );
 
       Console.WriteLine( Repository.Retrieve( "NameB" ) );
-      Console.WriteLine( Repository.GetTypes( "NameB" ) );
+      Console.WriteLine( Repository.GetType( "NameB" ) );
 
       Repository.Deregister( "NameB" );
 
       Console.WriteLine( Repository.Retrieve( "NameB" ) );
-      Console.WriteLine( Repository.GetTypes( "NameB" ) );
+      Console.WriteLine( Repository.GetType( "NameB" ) );
       Repository.Deregister( "NameB" );
 
       Repository.Register( "NameA", "Content A", Types.JSON );

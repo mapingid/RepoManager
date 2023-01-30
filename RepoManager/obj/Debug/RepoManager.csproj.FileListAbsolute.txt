@@ -1,0 +1,7 @@
+D:\RepoManager\RepoManager\obj\Debug\RepoManager.csproj.AssemblyReference.cache
+D:\RepoManager\RepoManager\obj\Debug\RepoManager.csproj.CoreCompileInputs.cache
+D:\RepoManager\RepoManager\bin\Debug\RepoManager.exe.config
+D:\RepoManager\RepoManager\bin\Debug\RepoManager.exe
+D:\RepoManager\RepoManager\bin\Debug\RepoManager.pdb
+D:\RepoManager\RepoManager\obj\Debug\RepoManager.exe
+D:\RepoManager\RepoManager\obj\Debug\RepoManager.pdb

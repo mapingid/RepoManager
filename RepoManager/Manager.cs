@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace RepoManager
 {
-  
   class Manager : IManager
   {
     List<Repo> LRepo = new List<Repo>();

@@ -17,7 +17,7 @@ namespace RepoManager
       Repository.Register( "NameB", "Content B", Types.JSON );
       Repository.Register( "NameC", "Content C", Types.XML );
 
-      Console.WriteLine( Repository.Retrieve( "NameB" ) );
+      Console.WriteLine( Repository.Retrieve( "NameB" ) ); //
       Console.WriteLine( Repository.GetType( "NameB" ) );
 
       Repository.Deregister( "NameB" );
@@ -32,6 +32,7 @@ namespace RepoManager
       Console.WriteLine( Repository.Retrieve( "NameB" ) );
 
       Console.Read();
-    }
+     
+  }
   }
 }

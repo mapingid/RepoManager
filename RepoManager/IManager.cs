@@ -17,6 +17,5 @@ namespace RepoManager
     string Retrieve(string itemName);
     int GetType(string itemName);
     void Deregister(string itemName);
-
   }
 }

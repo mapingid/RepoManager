@@ -13,7 +13,7 @@ namespace RepoManager
     //DELEGATE
     Dictionary<string, object> MyRepo = new Dictionary<string, object>();
     DelegateNotify OnDelegateNotify;
-    DelegateNotify AddDelegateSubs(ref DelegateNotify delegateNotify )
+    DelegateNotify AddDelegateSubs( ref DelegateNotify delegateNotify )
     {
       delegateNotify += DelegateClass1.getNotif;
       delegateNotify += DelegateClass2.getNotif;
@@ -46,7 +46,7 @@ namespace RepoManager
     {
       AddDelegateSubs( ref OnDelegateNotify );
       AddEventSubs( ref OnEventNotify );
-       
+
       if( MyRepo.ContainsKey( itemName ) )
       {
         OnDelegateNotify( $"{itemName} already Exist " );
@@ -75,40 +75,42 @@ namespace RepoManager
         return "Item Not Found";
       }
 
-      
+
     }
     public string GetType( string itemName )
     {
       if( MyRepo.ContainsKey( itemName ) )
       {
-        //DELEGATE EVENT
         return MyRepo[itemName].GetType().ToString();
       }
       else
       {
-        //DELEGATE EVENT
         return "Item Not Found";
       }
     }
     public void Deregister( string itemName )
     {
       AddDelegateSubs( ref OnDelegateNotify );
+      AddEventSubs( ref OnEventNotify );
 
       if( MyRepo.ContainsKey( itemName ) )
       {
         //DELEGATE EVENT
         //Console.WriteLine( $"Deregister {itemName}" );
         OnDelegateNotify( $"Deregister {itemName}" );
+        OnEventNotify( $"Deregister {itemName}" );
         MyRepo.Remove( itemName );
       }
       else
       {
         //DELEGATE EVENT
         OnDelegateNotify( $"{itemName} Not Found" );
+        OnEventNotify( $"{itemName} Not Found" );
         Console.WriteLine( "Item Not Found" );
       }
 
       ClearDelegateSubs( ref OnDelegateNotify );
+      ClearEventSubs( ref OnEventNotify );
     }
   }
 }

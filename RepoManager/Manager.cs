@@ -6,74 +6,63 @@ using System.Threading.Tasks;
 
 namespace RepoManager
 {
-  class Manager : IManager
+  
+  class Manager
   {
-    List<Repo> LRepo = new List<Repo>();
-
-    bool ValidationCheck( string itemName, string itemContent, Types itemType )
+    Dictionary<string, object> MyRepo = new Dictionary<string, object>();
+    public void Register( string itemName, object itemContent )
     {
-      foreach( Repo r in LRepo )
+      if( MyRepo.ContainsKey( itemName ) )
       {
-        if( itemName == r.name )
-        {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    public void Register( string itemName, string itemContent, Types itemType )
-    {
-      bool nameCheck = ValidationCheck( itemName, itemContent, itemType );
-      if( !nameCheck )
-      {
-        Console.WriteLine( $"Create {itemName} in {itemType} types" );
-        LRepo.Add( new Repo() { name = itemName, content = itemContent, type = (int)itemType } );
+        //DELEGATE EVENT
+        Console.WriteLine( "itemName already exist" );
       }
       else
       {
-        Console.WriteLine( $"Item Name : {itemName} already exist" );
+        MyRepo.Add( itemName, itemContent );
+        //DELEGATE EVENT
+        Console.WriteLine( $"Register {itemName}" );
       }
     }
-
-    public string Retrieve( string itemName )
+    public object Retrieve( string itemName )
     {
-      foreach( Repo r in LRepo )
+      if( MyRepo.ContainsKey( itemName ) )
       {
-        if( itemName == r.name )
-        {
-          return r.content;
-        }
+        //DELEGATE EVENT
+        return MyRepo[itemName];
       }
-      return "Not Found";
+      else
+      {
+        //DELEGATE EVENT
+        return "Item Not Found";
+      }
     }
-
-    public int GetType( string itemName )
+    public string GetType( string itemName )
     {
-      foreach( Repo r in LRepo )
+      if( MyRepo.ContainsKey( itemName ) )
       {
-        if( itemName == r.name )
-        {
-          return r.type;
-        }
+        //DELEGATE EVENT
+        return MyRepo[itemName].GetType().ToString();
       }
-      return -1;
+      else
+      {
+        //DELEGATE EVENT
+        return "Item Not Found";
+      }
     }
-
     public void Deregister( string itemName )
     {
-      foreach( Repo r in LRepo )
+      if( MyRepo.ContainsKey( itemName ) )
       {
-        if( itemName == r.name )
-        {
-          LRepo.Remove( r );
-          return;
-        }
+        //DELEGATE EVENT
+        Console.WriteLine( $"Deregister {itemName}" );
+        MyRepo.Remove( itemName );
       }
-      Console.WriteLine( "Not Found" );
+      else
+      {
+        //DELEGATE EVENT
+        Console.WriteLine( "Item Not Found" );
+      }
     }
-
-
-
   }
 }

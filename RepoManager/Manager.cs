@@ -10,56 +10,30 @@ namespace RepoManager
 
   class Manager
   {
-    //DELEGATE
     Dictionary<string, object> MyRepo = new Dictionary<string, object>();
-    DelegateNotify OnDelegateNotify;
-    DelegateNotify AddDelegateSubs( ref DelegateNotify delegateNotify )
-    {
-      delegateNotify += DelegateClass1.getNotif;
-      delegateNotify += DelegateClass2.getNotif;
-      delegateNotify += DelegateClass3.getNotif;
-      return delegateNotify;
-    }
-    DelegateNotify ClearDelegateSubs( ref DelegateNotify delegateNotify )
-    {
-      delegateNotify = null;
-      return delegateNotify;
-    }
 
-    //EVENT
-    event DelegateNotify OnEventNotify;
-    DelegateNotify AddEventSubs( ref DelegateNotify delegateNotify )
+    //DELEGATE
+    static event DelegateNotify delegateNotify;
+    public static void AddDelegate ( DelegateNotify d )
     {
-      delegateNotify += EventClass1.getNotif;
-      delegateNotify += EventClass2.getNotif;
-      delegateNotify += EventClass3.getNotif;
-      return delegateNotify;
+      delegateNotify += d;
     }
-    DelegateNotify ClearEventSubs( ref DelegateNotify delegateNotify )
+    protected virtual void OnNotify( string text)
     {
-      delegateNotify = null;
-      return delegateNotify;
+      delegateNotify?.Invoke(text);
     }
-
 
     public void Register( string itemName, object itemContent )
     {
-      AddDelegateSubs( ref OnDelegateNotify );
-      AddEventSubs( ref OnEventNotify );
-
       if( MyRepo.ContainsKey( itemName ) )
       {
-        OnDelegateNotify( $"{itemName} already Exist " );
-        OnEventNotify( $"{itemName} already Exist " );
+        OnNotify( $"{itemName} already Exist " );
       }
       else
       {
         MyRepo.Add( itemName, itemContent );
-        OnDelegateNotify( $"Register {itemName}" );
-        OnEventNotify( $"Register {itemName}" );
+        OnNotify( $"Register {itemName}" );
       }
-      ClearDelegateSubs( ref OnDelegateNotify );
-      ClearEventSubs( ref OnEventNotify );
     }
     public object Retrieve( string itemName )
     {
@@ -74,8 +48,6 @@ namespace RepoManager
         //DELEGATE EVENT
         return "Item Not Found";
       }
-
-
     }
     public string GetType( string itemName )
     {
@@ -90,27 +62,15 @@ namespace RepoManager
     }
     public void Deregister( string itemName )
     {
-      AddDelegateSubs( ref OnDelegateNotify );
-      AddEventSubs( ref OnEventNotify );
 
       if( MyRepo.ContainsKey( itemName ) )
       {
-        //DELEGATE EVENT
-        //Console.WriteLine( $"Deregister {itemName}" );
-        OnDelegateNotify( $"Deregister {itemName}" );
-        OnEventNotify( $"Deregister {itemName}" );
         MyRepo.Remove( itemName );
       }
       else
       {
-        //DELEGATE EVENT
-        OnDelegateNotify( $"{itemName} Not Found" );
-        OnEventNotify( $"{itemName} Not Found" );
         Console.WriteLine( "Item Not Found" );
       }
-
-      ClearDelegateSubs( ref OnDelegateNotify );
-      ClearEventSubs( ref OnEventNotify );
     }
   }
 }

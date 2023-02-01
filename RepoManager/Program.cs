@@ -25,6 +25,7 @@ namespace RepoManager
 
       Repository.Register( "NameA", xmlDummy );
       Repository.Register( "NameB", intDummy );
+      Repository.Register( "NameB", jsonDummy );
 
       Console.Read();
 
